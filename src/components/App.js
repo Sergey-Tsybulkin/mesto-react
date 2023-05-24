@@ -21,7 +21,7 @@ function App() {
   }
 
   return (
-    <body className="root">
+    <div className="root">
       <div className="page center">
         <Header />
         <Main
@@ -113,7 +113,7 @@ function App() {
         ></PopupWithForm>
         <ImagePopup card={selectedCard} onClose={closeAllPopups} />
       </div>
-    </body>
+    </div>
   );
 }
 
