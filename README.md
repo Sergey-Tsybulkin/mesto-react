@@ -26,6 +26,7 @@
 	+ scripts
   + validate
 
-npm i - установка
+Инструкция по работе с проектом:
 
-npm run dev - запуск проекта на локальном сервере
+npm install
+npm start
