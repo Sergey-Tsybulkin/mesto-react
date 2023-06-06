@@ -28,5 +28,5 @@
 
 Инструкция по работе с проектом:
 
-npm install
-npm start
++ npm install
++ npm start
