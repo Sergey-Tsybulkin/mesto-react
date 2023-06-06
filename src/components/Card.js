@@ -1,9 +1,29 @@
 import React from "react";
 
-function Card(card) {
+import CurrentUserContext from "../contexts/CurrentUserContext";
+
+function Card({ card, onCardClick, onCardLike, onCardDelete }) {
+  const currentUser = React.useContext(CurrentUserContext);
+  const isOwn = card.owner._id === currentUser._id;
+  const cardDeleteButtonClassName = `elements__trash ${
+    isOwn ? "elements__trash_show" : "elements__trash_hide"
+  }`;
+
+  const isLiked = card.likes.some((i) => i._id === currentUser._id);
+  const cardLikeButtonClassName = `elements__like-button ${
+    isLiked ? "elements__like-button_disabled" : ""
+  }`;
+
   function handleCardClick() {
-    card.onCardClick(card);
+    onCardClick(card);
   }
+  function handleLikeClick() {
+    onCardLike(card);
+  }
+  function handleDeleteClick() {
+    onCardDelete(card);
+  }
+
   return (
     <li className="elements__element">
       <img
@@ -12,11 +32,20 @@ function Card(card) {
         alt={card.name}
         onClick={handleCardClick}
       />
-      <button className="elements__trash" type="button"></button>
+      <button
+        type="button"
+        className={cardDeleteButtonClassName}
+        onClick={handleDeleteClick}
+      ></button>
+
       <div className="elements__info">
         <h2 className="elements__caption hide-text">{card.name}</h2>
         <div className="elements__like-section">
-          <button className="elements__like-button" type="button"></button>
+          <button
+            type="button"
+            className={cardLikeButtonClassName}
+            onClick={handleLikeClick}
+          ></button>
           <span className="elements__like-counter">{card.likes.length}</span>
         </div>
       </div>

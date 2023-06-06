@@ -16,7 +16,7 @@ class Api {
   // request to server and get data profile
   getProfile() {
     return fetch(`${this._url}/users/me`, {
-      method: 'GET',
+      method: "GET",
       headers: this._headers,
     }).then(this._handleResponse);
   }
@@ -24,7 +24,7 @@ class Api {
   // change profile info on server
   editProfile(data) {
     return fetch(`${this._url}/users/me`, {
-      method: 'PATCH',
+      method: "PATCH",
       headers: this._headers,
       body: JSON.stringify({
         name: data.name, //name = value name object (editProfile(data))
@@ -35,59 +35,68 @@ class Api {
 
   getInitialCards() {
     return fetch(`${this._url}/cards`, {
-      method: 'GET',
+      method: "GET",
       headers: this._headers,
     }).then(this._handleResponse);
   }
 
   setUserAvatar(data) {
     return fetch(`${this._url}/users/me/avatar`, {
-      method: 'PATCH',
+      method: "PATCH",
       headers: this._headers,
       body: JSON.stringify({
-        avatar: data.about,
+        avatar: data.avatar,
       }),
     }).then(this._handleResponse);
   }
 
   addCard(data) {
     return fetch(`${this._url}/cards`, {
-      method: 'POST',
+      method: "POST",
       headers: this._headers,
       body: JSON.stringify({
         name: data.name,
-        link: data.about,
+        link: data.link,
       }),
     }).then(this._handleResponse);
   }
 
   deleteCard(cardId) {
     return fetch(`${this._url}/cards/${cardId}`, {
-      method: 'DELETE',
+      method: "DELETE",
       headers: this._headers,
     }).then(this._handleResponse);
   }
 
-  addLike(cardId) {
-    return fetch(`${this._url}/cards/${cardId}/likes`, {
-      method: 'PUT',
-      headers: this._headers,
-    }).then(this._handleResponse);
-  }
+  //   addLike(cardId) {
+  //     return fetch(`${this._url}/cards/${cardId}/likes`, {
+  //       method: 'PUT',
+  //       headers: this._headers,
+  //     }).then(this._handleResponse);
+  //   }
 
-  deleteLike(cardId) {
+  //   deleteLike(cardId) {
+  //     return fetch(`${this._url}/cards/${cardId}/likes`, {
+  //       method: 'DELETE',
+  //       headers: this._headers,
+  //     }).then(this._handleResponse);
+  //   }
+  // }
+
+  // like/dislike
+  changeLikeCardStatus(cardId, isLiked) {
     return fetch(`${this._url}/cards/${cardId}/likes`, {
-      method: 'DELETE',
+      method: `${!isLiked ? "DELETE" : "PUT"}`,
       headers: this._headers,
     }).then(this._handleResponse);
   }
 }
 
 const api = new Api({
-  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-65',
+  baseUrl: "https://mesto.nomoreparties.co/v1/cohort-65",
   headers: {
-    authorization: 'e5cf9ce5-83ea-4919-bb56-96280137220a',
-    'Content-Type': 'application/json',
+    authorization: "e5cf9ce5-83ea-4919-bb56-96280137220a",
+    "Content-Type": "application/json",
   },
 });
 
